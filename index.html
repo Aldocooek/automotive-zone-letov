@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Automotive Zone Letov — Autoservis Praha 18 Letňany</title>
+  <meta name="description" content="Automotive Zone Letov — komplexní autoservis v Praze 18, Letňany. Opravy, diagnostika, výměna olejů, brzdy, klimatizace, příprava na STK. Volejte 731 259 753." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset & Base ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0a1628;
+      --navy2:  #0d1f3a;
+      --green:  #22c55e;
+      --green2: #16a34a;
+      --white:  #ffffff;
+      --muted:  #94a3b8;
+      --border: rgba(255,255,255,0.07);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Sora', sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* ─── Nav ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(10,22,40,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+
+    .nav-logo em {
+      font-style: normal;
+      color: var(--green);
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green);
+      color: var(--navy);
+      font-family: 'Sora', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      padding: 10px 22px;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    .nav-cta:hover { background: var(--green2); }
+
+    /* ─── Hero ─── */
+    #hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      max-height: 900px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0 48px;
+    }
+
+    /* Geometric zone grid background */
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-color: var(--navy);
+      overflow: hidden;
+    }
+
+    .hero-grid::before {
+      content: '';
+      position: absolute;
+      inset: -10%;
+      background-image:
+        linear-gradient(rgba(34,197,94,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34,197,94,0.08) 1px, transparent 1px);
+      background-size: 56px 56px;
+      transform: skewY(-6deg) skewX(-2deg);
+    }
+
+    /* Bold diagonal accent lines */
+    .hero-grid::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(135deg, rgba(34,197,94,0.04) 25%, transparent 25%),
+        linear-gradient(225deg, rgba(34,197,94,0.04) 25%, transparent 25%);
+      background-size: 120px 120px;
+    }
+
+    /* Radial vignette so grid fades toward center */
+    .hero-vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 80% at 30% 50%, transparent 40%, rgba(10,22,40,0.7) 100%);
+    }
+
+    /* Green accent bar — left edge */
+    .hero-accent-bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, transparent, var(--green) 30%, var(--green) 70%, transparent);
+      opacity: 0.9;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+      animation: fadeUp 0.85s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 24px;
+    }
+
+    .hero-tag::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 2px;
+      background: var(--green);
+    }
+
+    h1 {
+      font-size: clamp(32px, 3.5vw, 52px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--green);
+    }
+
+    .hero-sub {
+      font-size: clamp(15px, 1.4vw, 18px);
+      color: var(--muted);
+      font-weight: 400;
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--green);
+      color: var(--navy);
+      font-family: 'Sora', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 4px;
+      letter-spacing: 0.02em;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover { background: var(--green2); transform: translateY(-1px); }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--white);
+      font-family: 'Sora', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 4px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--green);
+      background: rgba(34,197,94,0.08);
+    }
+
+    /* Hero scroll indicator */
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      left: 48px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      z-index: 2;
+    }
+
+    .hero-scroll::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--muted);
+    }
+
+    /* ─── Sections shared ─── */
+    section {
+      padding: 96px 48px;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 16px;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--green);
+    }
+
+    .section-title {
+      font-size: clamp(26px, 2.8vw, 40px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .section-title em {
+      font-style: normal;
+      color: var(--green);
+    }
+
+    .section-desc {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.35s; }
+    .delay-4 { transition-delay: 0.5s; }
+
+    /* ─── Services ─── */
+    #services {
+      background: var(--navy2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .services-header {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 56px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .service-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      padding: 36px 32px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.25s, border-color 0.25s;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 2px;
+      background: var(--green);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .service-card:hover { background: rgba(34,197,94,0.04); border-color: rgba(34,197,94,0.2); }
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(34,197,94,0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .service-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--green);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .service-name {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .service-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ─── Why us ─── */
+    #why {
+      background: var(--navy);
+    }
+
+    .why-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .why-visual {
+      position: relative;
+      height: 400px;
+    }
+
+    /* Geometric zone block */
+    .zone-block {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      gap: 4px;
+    }
+
+    .zone-cell {
+      background: rgba(34,197,94,0.04);
+      border: 1px solid rgba(34,197,94,0.06);
+      border-radius: 2px;
+      transition: background 0.4s;
+    }
+
+    .zone-cell.lit { background: rgba(34,197,94,0.12); border-color: rgba(34,197,94,0.2); }
+    .zone-cell.bright { background: rgba(34,197,94,0.22); border-color: rgba(34,197,94,0.4); }
+
+    .zone-badge {
+      position: absolute;
+      bottom: -16px;
+      right: -16px;
+      background: var(--green);
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      padding: 18px 24px;
+      border-radius: 4px;
+      line-height: 1.3;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .stat { display: flex; flex-direction: column; gap: 4px; }
+
+    .stat-num {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--green);
+      letter-spacing: -0.03em;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .why-points {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .why-point {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .why-point-dot {
+      width: 8px;
+      height: 8px;
+      min-width: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      margin-top: 7px;
+    }
+
+    .why-point-text { font-size: 15px; line-height: 1.65; color: var(--muted); }
+    .why-point-text strong { color: var(--white); font-weight: 600; }
+
+    /* ─── Contact ─── */
+    #contact {
+      background: var(--navy2);
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      margin-top: 40px;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .contact-item-icon {
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      background: rgba(34,197,94,0.1);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contact-item-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--green);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .contact-item-body { display: flex; flex-direction: column; gap: 2px; }
+    .contact-item-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+    .contact-item-value { font-size: 16px; font-weight: 600; color: var(--white); }
+    .contact-item-value a { color: inherit; text-decoration: none; }
+    .contact-item-value a:hover { color: var(--green); }
+
+    /* CTA block */
+    .contact-cta {
+      background: rgba(34,197,94,0.06);
+      border: 1px solid rgba(34,197,94,0.15);
+      border-radius: 8px;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .contact-cta-title { font-size: 22px; font-weight: 700; line-height: 1.3; }
+    .contact-cta-sub { font-size: 15px; color: var(--muted); line-height: 1.6; }
+
+    .contact-cta-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .cta-phone {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--green);
+      color: var(--navy);
+      font-family: 'Sora', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      text-decoration: none;
+      padding: 16px 24px;
+      border-radius: 4px;
+      letter-spacing: 0.01em;
+      transition: background 0.2s;
+    }
+
+    .cta-phone:hover { background: var(--green2); }
+
+    .cta-phone svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    .cta-wa {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--white);
+      font-family: 'Sora', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 14px 24px;
+      border-radius: 4px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .cta-wa:hover { border-color: #25D366; background: rgba(37,211,102,0.08); }
+
+    /* ─── Footer ─── */
+    footer {
+      padding: 32px 48px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-logo {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+
+    .footer-logo em { font-style: normal; color: var(--green); }
+
+    .footer-copy { font-size: 13px; color: var(--muted); }
+
+    /* ─── WhatsApp Float ─── */
+    .wa-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 999;
+      width: 56px;
+      height: 56px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 24px rgba(37,211,102,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+    }
+
+    .wa-float:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 32px rgba(37,211,102,0.55);
+    }
+
+    .wa-float svg {
+      width: 30px;
+      height: 30px;
+      fill: white;
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      section { padding: 72px 24px; }
+
+      #hero { padding: 0 24px; }
+      .hero-scroll { left: 24px; }
+
+      .services-grid { grid-template-columns: 1fr 1fr; }
+
+      .why-layout { grid-template-columns: 1fr; gap: 48px; }
+      .why-visual { display: none; }
+
+      .contact-layout { grid-template-columns: 1fr; gap: 48px; }
+
+      footer { padding: 28px 24px; }
+    }
+
+    @media (max-width: 560px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; }
+      .btn-primary, .btn-outline { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <span class="nav-logo">Automotive <em>Zone</em> Letov</span>
+    <a class="nav-cta" href="tel:+420731259753">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      731 259 753
+    </a>
+  </nav>
+
+  <!-- Hero -->
+  <section id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-vignette"></div>
+    <div class="hero-accent-bar"></div>
+
+    <div class="hero-content">
+      <div class="hero-tag">Praha 18 — Letňany</div>
+      <h1>Automotive <em>Zone</em> — Letňany</h1>
+      <p class="hero-sub">Praha 18, komplexní autoservis<br>Beranových 65, 199 00 Praha 18</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="tel:+420731259753">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Zavolat hned
+        </a>
+        <a class="btn-outline" href="#services">Naše služby</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll">Scrollovat dolů</div>
+  </section>
+
+  <!-- Services -->
+  <section id="services">
+    <div class="section-inner">
+      <div class="services-header">
+        <span class="section-label reveal delay-1">Co děláme</span>
+        <h2 class="section-title reveal delay-2">Komplexní péče<br>o <em>váš vůz</em></h2>
+        <p class="section-desc reveal delay-3">Vše pod jednou střechou — od diagnostiky přes servis po přípravu na STK. Rychle, spolehlivě, za férové ceny.</p>
+      </div>
+
+      <div class="services-grid">
+        <!-- Opravy -->
+        <div class="service-card reveal delay-1">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div class="service-name">Opravy vozidel</div>
+          <p class="service-desc">Mechanické opravy osobních i užitkových vozidel. Rychlá diagnostika závad a spolehlivé řešení.</p>
+        </div>
+
+        <!-- Diagnostika -->
+        <div class="service-card reveal delay-2">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M18.36 5.64l1.41-1.41"/></svg>
+          </div>
+          <div class="service-name">Počítačová diagnostika</div>
+          <p class="service-desc">Profesionální diagnostika přes OBD — přesné určení závady bez zbytečného hledání.</p>
+        </div>
+
+        <!-- Oleje -->
+        <div class="service-card reveal delay-3">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>
+          </div>
+          <div class="service-name">Výměna olejů a filtrů</div>
+          <p class="service-desc">Výměna motorového oleje, vzduchového, olejového a palivového filtru. Správná specifikace pro váš motor.</p>
+        </div>
+
+        <!-- Brzdy -->
+        <div class="service-card reveal delay-1">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/></svg>
+          </div>
+          <div class="service-name">Brzdy</div>
+          <p class="service-desc">Výměna brzdových destiček, kotoučů a čelistí. Kontrola brzdového systému a kapaliny.</p>
+        </div>
+
+        <!-- Klimatizace -->
+        <div class="service-card reveal delay-2">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93 4.93 19.07"/></svg>
+          </div>
+          <div class="service-name">Klimatizace</div>
+          <p class="service-desc">Plnění, servis a dezinfekce klimatizace. Kontrola těsnosti a stavu systému.</p>
+        </div>
+
+        <!-- STK -->
+        <div class="service-card reveal delay-3">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="service-name">Příprava na STK</div>
+          <p class="service-desc">Kompletní kontrola a příprava vozu před technickou kontrolou. Minimalizujeme riziko neprůchodnosti.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why us -->
+  <section id="why">
+    <div class="section-inner">
+      <div class="why-layout">
+        <!-- Visual -->
+        <div class="why-visual reveal delay-1">
+          <div class="zone-block">
+            <div class="zone-cell"></div><div class="zone-cell lit"></div><div class="zone-cell"></div><div class="zone-cell"></div>
+            <div class="zone-cell lit"></div><div class="zone-cell bright"></div><div class="zone-cell bright"></div><div class="zone-cell lit"></div>
+            <div class="zone-cell"></div><div class="zone-cell bright"></div><div class="zone-cell lit"></div><div class="zone-cell"></div>
+            <div class="zone-cell"></div><div class="zone-cell lit"></div><div class="zone-cell"></div><div class="zone-cell"></div>
+          </div>
+          <div class="zone-badge">
+            Praha 18<br>Letňany
+          </div>
+          <div class="stats-row">
+            <div class="stat">
+              <span class="stat-num">6+</span>
+              <span class="stat-label">hodnocení zákazníků</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">100%</span>
+              <span class="stat-label">transparentní ceny</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Text -->
+        <div>
+          <span class="section-label reveal delay-1">Proč my</span>
+          <h2 class="section-title reveal delay-2">Servis, kterému <em>věříte</em></h2>
+          <p class="section-desc reveal delay-3">Jsme lokální autoservis v Praze 18, Letňanech. Záleží nám na každém zákazníkovi — ne na rychlém obratu.</p>
+
+          <div class="why-points">
+            <div class="why-point reveal delay-1">
+              <div class="why-point-dot"></div>
+              <p class="why-point-text"><strong>Diagnostika na místě.</strong> Moderní OBD vybavení — přesně víme kde je problém, než začneme opravovat.</p>
+            </div>
+            <div class="why-point reveal delay-2">
+              <div class="why-point-dot"></div>
+              <p class="why-point-text"><strong>Férové ceny bez překvapení.</strong> Cenu vždy sdělíme předem. Žádné skryté položky na faktuře.</p>
+            </div>
+            <div class="why-point reveal delay-3">
+              <div class="why-point-dot"></div>
+              <p class="why-point-text"><strong>Dostupnost v Letňanech.</strong> Beranových 65 — snadná dostupnost z celé Prahy 18 a okolí.</p>
+            </div>
+            <div class="why-point reveal delay-4">
+              <div class="why-point-dot"></div>
+              <p class="why-point-text"><strong>Komplexní servis.</strong> Opravy, diagnostika, oleje, brzdy, klima i STK — vše na jednom místě.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="section-inner">
+      <div class="contact-layout">
+        <div>
+          <span class="section-label reveal delay-1">Kontakt</span>
+          <h2 class="section-title reveal delay-2">Objednejte se<br>nebo <em>zavolejte</em></h2>
+          <p class="section-desc reveal delay-3">Jsme k dispozici pro dotazy i rychlé objednání. Ozve se nám — odpovíme obratem.</p>
+
+          <div class="contact-info">
+            <div class="contact-item reveal delay-1">
+              <div class="contact-item-icon">
+                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div class="contact-item-body">
+                <span class="contact-item-label">Telefon</span>
+                <span class="contact-item-value"><a href="tel:+420731259753">731 259 753</a></span>
+              </div>
+            </div>
+
+            <div class="contact-item reveal delay-2">
+              <div class="contact-item-icon">
+                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div class="contact-item-body">
+                <span class="contact-item-label">Adresa</span>
+                <span class="contact-item-value">Beranových 65, 199 00 Praha 18</span>
+              </div>
+            </div>
+
+            <div class="contact-item reveal delay-3">
+              <div class="contact-item-icon">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div class="contact-item-body">
+                <span class="contact-item-label">Provozní doba</span>
+                <span class="contact-item-value">Po–Pá 8:00–17:00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-cta reveal delay-2">
+          <div class="contact-cta-title">Připraveni vám pomoci hned</div>
+          <p class="contact-cta-sub">Zavolejte nebo napište přes WhatsApp — rychlá domluva, bez čekání.</p>
+          <div class="contact-cta-actions">
+            <a class="cta-phone" href="tel:+420731259753">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              731 259 753
+            </a>
+            <a class="cta-wa" href="https://wa.me/420731259753" target="_blank" rel="noopener">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.116 1.522 5.847L.057 23.571a.75.75 0 0 0 .92.923l5.803-1.519A11.953 11.953 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-4.998-1.368l-.36-.213-3.71.972.99-3.617-.234-.371A9.818 9.818 0 0 1 2.182 12C2.182 6.567 6.567 2.182 12 2.182S21.818 6.567 21.818 12 17.433 21.818 12 21.818z"/></svg>
+              Napsat na WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <span class="footer-logo">Automotive <em>Zone</em> Letov</span>
+    <span class="footer-copy">Beranových 65, 199 00 Praha 18 &nbsp;|&nbsp; 731 259 753</span>
+  </footer>
+
+  <!-- WhatsApp Float -->
+  <a class="wa-float" href="https://wa.me/420731259753" target="_blank" rel="noopener" aria-label="Napsat na WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.116 1.522 5.847L.057 23.571a.75.75 0 0 0 .92.923l5.803-1.519A11.953 11.953 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-4.998-1.368l-.36-.213-3.71.972.99-3.617-.234-.371A9.818 9.818 0 0 1 2.182 12C2.182 6.567 6.567 2.182 12 2.182S21.818 6.567 21.818 12 17.433 21.818 12 21.818z"/>
+    </svg>
+  </a>
+
+  <script>
+    // Scroll reveal via IntersectionObserver
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealEls.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
